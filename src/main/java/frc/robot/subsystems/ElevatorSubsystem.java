@@ -29,8 +29,8 @@ public class ElevatorSubsystem extends SubsystemBase {
   private final MotionMagicVoltage m_mmReq = new MotionMagicVoltage(0);
   public ElevatorSubsystem() {
 
-    talon = new TalonFX(10, "drive");
-    follower = new TalonFX(11, "drive");
+    talon = new TalonFX(42, "drive");
+    follower = new TalonFX(41, "drive");
 
     TalonFXConfiguration cfg = new TalonFXConfiguration();
 
