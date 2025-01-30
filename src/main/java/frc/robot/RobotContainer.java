@@ -11,6 +11,8 @@ import com.ctre.phoenix6.swerve.SwerveRequest;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -20,10 +22,13 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-
+import frc.robot.commands.ElevatorToL1;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands; 
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -44,8 +49,16 @@ public class RobotContainer {
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
+   // private final SendableChooser<Command> autoChoice;
+
     public RobotContainer() {
+    //      autoChoice = AutoBuilder.buildAutoChooser();
+
+    // Shuffleboard.getTab("Autonomous").add(autoChoice);
+
         configureBindings();
+
+        NamedCommands.registerCommand("ElevatorCommands", new ElevatorToL1(m_elevatorSubsystem));
     }
 
     private void configureBindings() {
@@ -87,6 +100,11 @@ public class RobotContainer {
         m_driverController.y().onTrue(new RunCommand(() -> m_elevatorSubsystem.motionMagicSetPosition(20.0), m_elevatorSubsystem));
         
         m_driverController.start().onTrue(new InstantCommand(()-> m_elevatorSubsystem.setZero(), m_elevatorSubsystem));
+
+        // set the command "ElevatortoL1" to active when the right bumper is pressed on the driver controller
+        //m_driverController.rightBumper().onTrue(new ElevatorToL1(m_elevatorSubsystem));
+
+
         // reset the field-centric heading on left bumper press
         //joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 

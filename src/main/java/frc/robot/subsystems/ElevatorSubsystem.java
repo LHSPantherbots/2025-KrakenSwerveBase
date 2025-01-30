@@ -105,14 +105,16 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   }
 
-
-
-
   public void motionMagicSetPosition(double pos){
     talon.setControl(m_mmReq.withPosition(pos).withSlot(0));
   }
 
   public void setZero(){
     talon.setPosition(0.0);
+  }
+
+  public double getPosition(){
+    double pos = talon.getPosition().getValueAsDouble();
+    return pos;
   }
 }
