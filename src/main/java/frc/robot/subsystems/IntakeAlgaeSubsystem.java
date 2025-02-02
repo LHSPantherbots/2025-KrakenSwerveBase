@@ -1,4 +1,4 @@
-package main.java.frc.robot.subsystems;
+package frc.robot.subsystems;
 
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
@@ -10,7 +10,7 @@ import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import main.java.frc.robot.Constants.ModuleConstants.IntakeAlgaeConstants;
+import frc.robot.Constants.ModuleConstants.IntakeAlgaeConstants;
 
 public class IntakeAlgaeSubsystem extends SubsystemBase{
   private final SparkMax m_IntakeAlgae;
